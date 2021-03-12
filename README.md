@@ -18,6 +18,11 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
+File Based Routing is a Next.js concept that uses the name of the components created as url paths :
+
+* index.js is a special name which will translate to the / path.
+* For a folder containing components related to say products, we may have components to create a new product, view all products, view product details etc, for all products we will have /products (this is the index.js inside the products folder), foe new product we will have new.js (translates to /products/new) and for the detailed view of a product we will have [id].js (a dynamic path ie. /products/:id)
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
