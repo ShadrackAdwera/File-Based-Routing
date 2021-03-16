@@ -1,5 +1,7 @@
 const AllParties = () => {
-return <div>All Parties</div>;
+return <div>
+    <p>All Parties</p>
+</div>;
 }
 
 export default AllParties;
