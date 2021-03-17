@@ -1,9 +1,8 @@
 import { getFeaturedEvents } from "../dummy-parties";
+import EventList from '../components/events/event-list';
 
 
 export default function Home() {
   const featuredEvents = getFeaturedEvents();
-  return <div>
-    <p>Featured Events</p>
-  </div>;
+  return <EventList items={featuredEvents}/>;
 }
