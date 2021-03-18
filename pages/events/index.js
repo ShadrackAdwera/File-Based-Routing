@@ -1,7 +1,11 @@
+import { getAllEvents } from "../../dummy-parties";
+import EventList from '../../components/events/event-list';
+
+
 const AllParties = () => {
-return <div>
-    <p>All Parties</p>
-</div>;
+const allParties = getAllEvents();
+
+return <EventList items={allParties}/>;
 }
 
 export default AllParties;
