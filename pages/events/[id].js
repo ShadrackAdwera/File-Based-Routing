@@ -5,12 +5,15 @@ import { getEventById } from '../../dummy-parties';
 import EventSummary from '../../components/event-detail/event-summary';
 import EventLogistics from '../../components/event-detail/event-logistics';
 import EventContent from '../../components/event-detail/event-content';
+import ErrorAlert from '../../components/events/error-alert';
 
 const PartyDetails = () => {
     const router = useRouter();
     const foundEvent = getEventById(router.query.id);
     if(!foundEvent) {
-        return <h5>No event found</h5>
+        return <ErrorAlert>
+            <h5>No event found</h5>
+        </ErrorAlert>
     }
     return <Fragment>
         <EventSummary title={foundEvent.title}/>
