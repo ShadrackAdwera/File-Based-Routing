@@ -11,7 +11,7 @@ const DUMMY_EVENTS = [
     },
     {
       id: 'e2',
-      title: 'Partying for introverts',
+      title: 'Exclusive VIP',
       description:
         "We know: Parties are no fun if you are an introvert person. That's why we came up with this event - it'll be so much easier. Promised!",
       location: 'New Wall Street 5, 98765 Kanairo',
@@ -21,7 +21,7 @@ const DUMMY_EVENTS = [
     },
     {
       id: 'e3',
-      title: 'Partying for extroverts',
+      title: 'Invites Only Party',
       description:
         'You probably need no help with parties in general. But focusing your energy correctly - that is something where most people can improve.',
       location: 'My Street 12, 10115 Broke City',
