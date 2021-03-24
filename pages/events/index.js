@@ -27,12 +27,12 @@ const onSubmitHandler = (month,year) => {
     router.push(`/events/${year}/${month}`)
 }
 if(error) {
-    return <p className='centered'>An error occured.</p>
+    return <p className='center'>An error occured.</p>
 }
 
 return <Fragment>
     <EventsSearch onSubmit={onSubmitHandler}/>
-    {allParties && allParties.length>0? <EventList items={allParties}/> : <p className='centered'>Loading...</p>}
+    {allParties && allParties.length>0? <EventList items={allParties}/> : <p className='center'>Loading...</p>}
 </Fragment>;
 }
 

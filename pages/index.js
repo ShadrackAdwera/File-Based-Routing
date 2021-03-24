@@ -21,10 +21,10 @@ export default function Home(props) {
   },[data]);
 
   if(error) {
-    return <p className='centered'>AN error occured</p>;
+    return <p className='center'>AN error occured</p>;
   }
 
-  return allFeatured.length===0? <p className='centered'>Loading...</p> : <EventList items={allFeatured}/>;
+  return allFeatured.length===0? <p className='center'>Loading...</p> : <EventList items={allFeatured}/>;
 }
 
 export async function getStaticProps() {
