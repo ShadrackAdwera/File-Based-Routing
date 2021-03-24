@@ -25,7 +25,7 @@ const EventItem = props => {
             </div>
             <div className={styles.actions}>
             <Button link={`/events/${props.id}`}>
-                <span>Explore Event</span>
+                <span>View Event</span>
                 <span className={styles.icon}>
                     <ArrowRightIcon />
                 </span>

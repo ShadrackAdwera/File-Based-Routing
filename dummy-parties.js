@@ -13,7 +13,7 @@ const DUMMY_EVENTS = [
       id: 'e2',
       title: 'Exclusive VIP',
       description:
-        "We know: Parties are no fun if you are an introvert person. That's why we came up with this event - it'll be so much easier. Promised!",
+        "We know: Parties are no fun if it is not exclusive. That's why we came up with this event - it'll be so much easier. Promised!",
       location: 'New Wall Street 5, 98765 Kanairo',
       date: '2021-05-30',
       image: 'images/intro.jpeg',
