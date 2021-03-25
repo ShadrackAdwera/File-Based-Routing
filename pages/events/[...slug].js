@@ -2,22 +2,23 @@ import { Fragment } from 'react';
 import { useRouter } from 'next/router';
 
 import EventList from '../../components/events/event-list';
-import { getFilteredEvents } from '../../dummy-parties';
+import { getFilteredEvents } from '../../components/utils/api';
 import ResultsTitle from '../../components/events/results-title';
 import Button from '../../components/ui/Button';
 import ErrorAlert from '../../components/events/error-alert';
 
-const FilteredParties = () => {
-  const router = useRouter();
-  const filterQuery = router.query.slug;
+const FilteredParties = (props) => {
+  //const router = useRouter();
+  //const filterQuery = router.query.slug;
+  const { hasError, filteredEvents, year, month } = props;
 
-  if (!filterQuery) {
-    return <p className="center">Loading...</p>;
-  }
-   const numberedYear = +filterQuery[0];
-   const numberedMonth = +filterQuery[1];
+  // if (!filterQuery) {
+  //   return <p className="center">Loading...</p>;
+  // }
+  //  const numberedYear = +filterQuery[0];
+  //  const numberedMonth = +filterQuery[1];
 
-  if(isNaN(numberedYear) || isNaN(numberedMonth) || numberedYear > 2030 || numberedYear < 2021 || numberedMonth < 1 || numberedMonth > 12 ) {
+  if(hasError) {
     return <Fragment>
         <ErrorAlert>
         <p>Invalid filters!</p>
@@ -27,9 +28,9 @@ const FilteredParties = () => {
         </div>
     </Fragment>;
   }
-  const foundEvents = getFilteredEvents({year: numberedYear, month: numberedMonth});
+  //const foundEvents = getFilteredEvents({year: numberedYear, month: numberedMonth});
 
-  if(!foundEvents || foundEvents.length===0) {
+  if(!filteredEvents || filteredEvents.length===0) {
       return <Fragment>
       <ErrorAlert>
       <p>No events found</p>
@@ -40,11 +41,29 @@ const FilteredParties = () => {
   </Fragment>;
   }
 
-  const newDate = new Date(numberedYear, numberedMonth-1)
+  const newDate = new Date(year, month-1)
 
   return <Fragment>
       <ResultsTitle date={newDate}/>
-      <EventList items={foundEvents}/>
+      <EventList items={filteredEvents}/>
   </Fragment>;
 };
 export default FilteredParties;
+
+export async function getServerSideProps(context) {
+  const { params } = context;
+  const filteredData = params.slug;
+  const year = +filteredData[0];
+  const month = +filteredData[1];
+
+  if(isNaN(year) || isNaN(month) || year > 2030 || year < 2021 || month < 1 || month > 12 ) { 
+    return {
+      hasError: true 
+      // notFound: true, 
+    // redirect: {destination: '/error-page'}
+    }
+  }
+  const filteredEvents = await getFilteredEvents({year, month});
+
+  return { props: {filteredEvents: filteredEvents, year: year, month: month} };
+}
