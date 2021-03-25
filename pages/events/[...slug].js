@@ -18,9 +18,16 @@ const FilteredParties = (props) => {
   // }
   //  const numberedYear = +filterQuery[0];
   //  const numberedMonth = +filterQuery[1];
+  const newDate = new Date(year, month-1)
+
+  const pageHead = <Head>
+  <title>Found Parties</title>
+  <meta name='description' content={`All Parties for ${month}/${year}.`}/>
+</Head>;
 
   if(hasError) {
     return <Fragment>
+      {pageHead}
         <ErrorAlert>
         <p>Invalid filters!</p>
         </ErrorAlert>
@@ -33,6 +40,7 @@ const FilteredParties = (props) => {
 
   if(!filteredEvents || filteredEvents.length===0) {
       return <Fragment>
+        {pageHead}
       <ErrorAlert>
       <p>No events found</p>
       </ErrorAlert>
@@ -42,13 +50,9 @@ const FilteredParties = (props) => {
   </Fragment>;
   }
 
-  const newDate = new Date(year, month-1)
 
   return <Fragment>
-    <Head>
-      <title>Found Parties</title>
-      <meta name='description' content={`All Parties for ${month}/${year}.`}/>
-    </Head>
+    {pageHead}
       <ResultsTitle date={newDate}/>
       <EventList items={filteredEvents}/>
   </Fragment>;
