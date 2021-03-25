@@ -1,5 +1,6 @@
 import { Fragment, useState, useEffect } from "react";
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 import { getAllEvents } from '../../components/utils/api';
 import EventList from '../../components/events/event-list';
@@ -31,6 +32,10 @@ if(error) {
 }
 
 return <Fragment>
+     <Head>
+      <title>All Parties</title>
+      <meta name='description' content='Find all parties for the upcoming years'/>
+    </Head>
     <EventsSearch onSubmit={onSubmitHandler}/>
     {allParties && allParties.length>0? <EventList items={allParties}/> : <p className='center'>Loading...</p>}
 </Fragment>;
