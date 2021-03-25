@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import Head from 'next/head';
+import React, { useEffect, useState } from 'react';
 import EventList from '../components/events/event-list';
 import useSWR from 'swr';
 
@@ -24,7 +25,13 @@ export default function Home(props) {
     return <p className='center'>AN error occured</p>;
   }
 
-  return allFeatured.length===0? <p className='center'>Loading...</p> : <EventList items={allFeatured}/>;
+  return allFeatured.length===0? <p className='center'>Loading...</p> : <React.Fragment>
+    <Head>
+      <title>My Party People</title>
+      <meta name='description' content='Find parties for the upcoming years'/>
+    </Head>
+    <EventList items={allFeatured}/>
+  </React.Fragment>;
 }
 
 export async function getStaticProps() {
