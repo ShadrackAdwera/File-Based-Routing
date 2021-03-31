@@ -11,9 +11,16 @@ const commentsHandler = (req,res) => {
         const filePath = path.join(process.cwd(),'data','comments.json');
         const stringifiedData = fs.readFileSync(filePath);
         const data = JSON.parse(stringifiedData);
-        data.unshift({id: Date.now(), name: userName, email: emailAddress, comment: userComment});
+        data.unshift({id: Date.now(), name: userName, email: emailAddress, comment: userComment, eventId: eventId});
         fs.writeFileSync(filePath, JSON.stringify(data));
-        res.status(201).json({message: 'Your comment has been posted!'});
+        return res.status(201).json({message: 'Your comment has been posted!'});
+    } else {
+        const eventId = req.query.id;
+        const filePath = path.join(process.cwd(),'data','comments.json');
+        const stringifiedData = fs.readFileSync(filePath);
+        const data = JSON.parse(stringifiedData);
+        const commentsFound = data.filter(d=>d.eventId===eventId);
+        return res.status(200).json({totalComments: commentsFound.length, comments: commentsFound});
     }
 
 }
