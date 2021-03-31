@@ -1,6 +1,6 @@
 import styles from './comment-list.module.css';
 
-function CommentList() {
+const CommentList = () => { 
   return (
     <ul className={styles.comments}>
       {/* Render list of comments - fetched from API */}
