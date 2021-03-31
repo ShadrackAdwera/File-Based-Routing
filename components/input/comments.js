@@ -15,6 +15,15 @@ const toggleCommentsHandler = () => {
 
 const addCommentHandler = (commentData) => {
     // send data to API
+    fetch(`http://localhost:3000/events/${eventId}/comments`, {
+      method: 'POST',
+      body: JSON.stringify(commentData),
+      headers : {
+        'Content-Type':'application/json'
+      }
+    }).then(response=>response.json())
+    .then(resData=>alert(resData.message))
+    .catch(error=>console.log(error));
   }
 
   return (

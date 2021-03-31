@@ -6,7 +6,7 @@ const commentsHandler = (req,res) => {
         const eventId = req.query.id;
         const emailAddress = req.body.email;
         const userName = req.body.name;
-        const userComment = req.body.comment;
+        const userComment = req.body.text;
 
         const filePath = path.join(process.cwd(),'data','comments.json');
         const stringifiedData = fs.readFileSync(filePath);
