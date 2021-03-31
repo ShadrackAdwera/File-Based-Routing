@@ -11,7 +11,7 @@ const NewsletterRegistration = () => {
 
   return (
     <section className={classes.newsletter}>
-      <h2>Sign up to stay updated!</h2>
+      <h3>Sign up to stay updated!</h3>
       <form onSubmit={registrationHandler}>
         <div className={classes.control}>
           <input

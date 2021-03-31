@@ -18,14 +18,15 @@
   }
   
   .newsletter button {
-    background-color: #03be9f;
-    border: 1px solid #03be9f;
+    background-color: #94fdfd;
+    border: 1px solid #94fdfd;
     border-radius: 6px;
-    color: #dafff7;
+    color: black;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     font: inherit;
     cursor: pointer;
+    padding: 0.5rem;
   }
   
   .newsletter button:hover,

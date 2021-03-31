@@ -1,7 +1,9 @@
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
-import EventList from '../components/events/event-list';
 import useSWR from 'swr';
+
+import EventList from '../components/events/event-list';
+import NewsLetterRegistration from '../components/input/newsletter-registration'; 
 
 import { getFeaturedEvents } from '../components/utils/api';
 
@@ -30,6 +32,7 @@ export default function Home(props) {
       <title>My Party People</title>
       <meta name='description' content='Find parties for the upcoming years'/>
     </Head>
+    <NewsLetterRegistration />
     <EventList items={allFeatured}/>
   </React.Fragment>;
 }
