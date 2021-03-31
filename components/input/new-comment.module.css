@@ -38,5 +38,6 @@
   }
   
   .form button {
-    background-color: white;
+    background-color: black !important;
+    color: white !important;
   }

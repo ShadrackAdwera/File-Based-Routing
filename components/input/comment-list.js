@@ -1,23 +1,32 @@
 import styles from './comment-list.module.css';
 
-const CommentList = () => { 
-  return (
-    <ul className={styles.comments}>
+const CommentList = (props) => { 
+  return (props.data && props.data.commentsFound.length>0? <ul className={styles.comments}>
       {/* Render list of comments - fetched from API */}
-      <li>
-        <p>This is my comment Cabron!!</p>
+      {props.data.commentsFound.map(commentFound=><li>
+        <p>{commentFound.comment}</p>
         <div>
-          By <address>Deez Nuts</address>
+          By <address>{commentFound.name}</address>
         </div>
-      </li>
-      <li>
-        <p>Another comment yo!</p>
-        <div>
-          By <address>Likon Deez Nuts</address>
-        </div>
-      </li>
-    </ul>
+      </li>)}
+    </ul> : <p className='center'>No comments found</p>
   );
 }
 
 export default CommentList;
+
+// export async function getStaticProps(context) {
+//   console.log('Method running...');
+// }
+
+export async function getServerSideProps(context) {
+  const eventId = context.params.id;
+  const response = await fetch(`http://localhost:3000/api/events/${eventId}/comments`);
+  const resData = await response.json();
+    if (!resData) {
+      return {
+        notFound: true,
+      }
+    }
+    return { props: { data: resData } };
+}
