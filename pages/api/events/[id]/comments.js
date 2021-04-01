@@ -4,14 +4,12 @@ import path from 'path';
 const commentsHandler = (req,res) => {
     if(req.method==='POST') {
         const eventId = req.query.id;
-        const emailAddress = req.body.email;
-        const userName = req.body.name;
-        const userComment = req.body.text;
+        const { email, name, text } = req.body;
 
         const filePath = path.join(process.cwd(),'data','comments.json');
         const stringifiedData = fs.readFileSync(filePath);
         const data = JSON.parse(stringifiedData);
-        data.unshift({id: Date.now(), name: userName, email: emailAddress, comment: userComment, eventId: eventId});
+        data.unshift({id: Date.now(), name: name, email: email, comment: text, eventId: eventId});
         fs.writeFileSync(filePath, JSON.stringify(data));
         return res.status(201).json({message: 'Your comment has been posted!'});
     } else {
