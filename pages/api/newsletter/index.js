@@ -1,16 +1,6 @@
 // import fs from 'fs';
 // import path from 'path';
-import { MongoClient } from 'mongodb';
-
-const connectToDB = async() => {
-    const client = await MongoClient.connect('mongodb+srv://next_party_user:kawz8hoI89Whafwp@cluster0.dska4.mongodb.net/next-party?retryWrites=true&w=majority')
-    return client;
-}
-
-const insertDoc = async(client, doc) => {
-    const dbCollection = client.db();
-    await dbCollection.collection('emails').insertOne(doc);
-}
+import { insertDoc, connectToDB } from '../../../components/utils/db-utils';
 
 const NewsletterHandler = async(req,res) => {
     if(req.method==='POST') {
@@ -29,11 +19,11 @@ const NewsletterHandler = async(req,res) => {
         }
 
        try {
-        await insertDoc(client, {email: emailAddress});
+        await insertDoc(client,'emails',{email: emailAddress});
         client.close();
-        return res.status(201).json({message: 'Email Address registered!'});
+        res.status(201).json({message: 'Email Address registered!'});
        } catch (error) {
-           return res.status(500).json({message: 'Failed to save the data'});     
+        res.status(500).json({message: 'Failed to save the data'});     
        } 
     }
 }
