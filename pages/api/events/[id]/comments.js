@@ -26,6 +26,7 @@ const commentsHandler = async (req, res) => {
       client.close();
     } catch (error) {
         res.status(500).json({message: 'COuld not add comment, try again'});
+        client.close();
     }
   } else {
     const eventId = req.query.id;
@@ -49,8 +50,10 @@ const commentsHandler = async (req, res) => {
       .toArray();
 
        res.status(200).json({ totalComments: commentsFound.length, comments: commentsFound });
+       client.close();
     } catch (error) {
         res.status(500).json({message: 'Unable to fetch data from the DB'});
+        client.close();
     }
   }
 };
