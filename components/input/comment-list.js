@@ -3,7 +3,7 @@ import styles from './comment-list.module.css';
 const CommentList = (props) => { 
   return (props.comments && props.comments.length>0? <ul className={styles.comments}>
       {/* Render list of comments - fetched from API */}
-      {props.comments.map(commentFound=><li key={commentFound.id}>
+      {props.comments.map(commentFound=><li key={commentFound._id}>
         <p>{commentFound.comment}</p>
         <div>
           By <address>{commentFound.name}</address>
