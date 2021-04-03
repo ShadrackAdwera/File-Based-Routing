@@ -37,15 +37,9 @@ const NewsletterRegistration = () => {
     .then(resData=>{
       emailRef.current.value = '';
       ctx.showNotification({title:'Success', message: resData.message, status: 'success'});
-      setTimeout(()=>{
-        ctx.hideNotification();
-      },3000);
     })
     .catch(error=>{
       ctx.showNotification({title:'Error', message: error.message || 'Something went wrong, try again', status: 'error'});
-      setTimeout(()=>{
-        ctx.hideNotification();
-      },3000);
     });
   }
 
