@@ -1,18 +1,22 @@
-import { useRef } from 'react';
+import { useRef, useContext } from 'react';
 
 import { validateEmail } from '../utils/emailValidation';
 import classes from './newsletter-registration.module.css';
+import NotificationContext from '../../store/notification-context';
 
 const NewsletterRegistration = () => {
   const emailRef = useRef();
+  const ctx = useContext(NotificationContext);
+
   const registrationHandler = (event) => {
     event.preventDefault();
+    ctx.showNotification({title:'Registering...',message:'Your email is being registered', status: 'pending'});
     // fetch user input (refs)
     const userEmail = emailRef.current.value;
     //validate input
     const emailResult = validateEmail(userEmail);
     if(!emailResult) {
-      alert('Enter a valid email address');
+      ctx.showNotification({title:'Invalid email',message:'Enter a valid email address', status: 'error'});
       return;
     }
     // send valid data to API
@@ -22,9 +26,16 @@ const NewsletterRegistration = () => {
       headers: {
         'Content-Type':'application/json'
       }
-    }).then(response=>response.json())
-    .then(resData=>alert(resData.message))
-    .catch(error=>console.log(error));
+    }).then(response=>{
+      if(response.ok) {
+        return response.json();
+      }
+      return response.json().then(data=>{
+        throw new Error(data.message || 'Something went wrong');
+      })
+    })
+    .then(resData=>ctx.showNotification({title:'Success', message: resData.message, status: 'success'}))
+    .catch(error=>ctx.showNotification({title:'Error', message: error.message || 'Something went wrong, try again', status: 'error'}));
   }
 
   return (
