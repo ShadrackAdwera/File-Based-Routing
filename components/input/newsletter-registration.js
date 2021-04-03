@@ -34,8 +34,19 @@ const NewsletterRegistration = () => {
         throw new Error(data.message || 'Something went wrong');
       })
     })
-    .then(resData=>ctx.showNotification({title:'Success', message: resData.message, status: 'success'}))
-    .catch(error=>ctx.showNotification({title:'Error', message: error.message || 'Something went wrong, try again', status: 'error'}));
+    .then(resData=>{
+      emailRef.current.value = '';
+      ctx.showNotification({title:'Success', message: resData.message, status: 'success'});
+      setTimeout(()=>{
+        ctx.hideNotification();
+      },3000);
+    })
+    .catch(error=>{
+      ctx.showNotification({title:'Error', message: error.message || 'Something went wrong, try again', status: 'error'});
+      setTimeout(()=>{
+        ctx.hideNotification();
+      },3000);
+    });
   }
 
   return (
